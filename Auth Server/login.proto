@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package LoginAuth;
+
+service Login {
+  rpc Authenticate (LoginRequest) returns (LoginReply) {}
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
+}
+
+// The request message containing the user's name.
+message LoginRequest {
+  string username = 1;
+  int64 p = 2;
+  int64 g = 3;
+  int64 c = 4;
+  int64 cipher =5; 
+}
+
+// The response message containing the greetings
+message LoginReply {
+  bool response = 1;
+  optional int32 id = 2;
+}
+
+message RegisterRequest{
+    string username =1;
+    string password =2;
+    string email = 3;
+}
+
+message RegisterResponse{
+    enum Status {
+        UNKNOWN = 0;
+        ALREADY_EXISTS =1;
+        SUCCESS = 2;
+        ERROR =3;
+    }
+
+    Status status =1;
+}
